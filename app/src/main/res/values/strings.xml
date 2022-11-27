@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Loan Management App</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in_to_continue">Sign In To Continue</string>
+    <string name="sign_in_now">Sign In Now</string>
+    <string name="image_logo">image logo</string>
+    <string name="signin_to_continue">SignIn To Continue</string>
+    <string name="menu_open">Open</string>
+    <string name="menu_close">Close</string>
+    <string name="pref_file_key">pref_file_key</string>
+    <string name="pref_is_user_login">isuserlogin</string>
+    <string name="pref_name_of_user">nameofuser</string>
+</resources>

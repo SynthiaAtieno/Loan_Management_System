@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/person"
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/apply_loan"
+            android:icon="@drawable/home"
+            android:title="Apply Loan " />
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:title="Authentication">
+            <menu>
+                <group>
+                    <item
+                        android:id="@+id/nav_logout"
+                        android:icon="@drawable/logout"
+                        android:title="Logout" />
+                </group>
+            </menu>
+        </item>
+    </group>
+</menu>
