@@ -11,4 +11,7 @@
     <string name="pref_file_key">pref_file_key</string>
     <string name="pref_is_user_login">isuserlogin</string>
     <string name="pref_name_of_user">nameofuser</string>
+    <string name="pref_user_id">user_id</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="8dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="24dp"
+    >
+    <LinearLayout
+        android:background="@drawable/loan_background"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="100dp">
+<!--        <TextView-->
+<!--            android:textAlignment="textStart"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="39dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Applied"/>-->
+    </LinearLayout>
+    <LinearLayout
+        android:background="#69191613"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+            <TextView
+                android:id="@+id/loan_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:shadowDy="10"
+                android:shadowDx="6"
+                android:shadowRadius="14"
+                android:layout_marginStart="18dp"
+                android:drawablePadding="8dp"
+                android:shadowColor="#000"
+                android:inputType="text"
+                android:text="Loan Id"
+                android:textColor="#fff"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txt_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/loan_id"
+                android:shadowDy="10"
+                android:shadowDx="6"
+                android:shadowRadius="14"
+                android:drawableStart="@drawable/ic_baseline_currency_bitcoin_24"
+                android:drawablePadding="8dp"
+                android:shadowColor="#000"
+                android:inputType="number"
+                android:text="Amount"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="30sp" />
+
+
+            <TextView
+                android:id="@+id/txt_description"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_amount"
+                android:inputType="text"
+                android:text="Description"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_description"
+                android:inputType="text"
+                android:textColor="#000"
+                android:text="name"
+                android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_userId"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_description"
+            android:inputType="text"
+            android:textColor="#000"
+            android:text="name"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout1"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/lobster_regular"
+            android:inputType="text"
+            android:text="name"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="16sp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout1"
+            android:text="Approve"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:id="@+id/approve"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout1"
+            android:text="Reject"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="15dp"
+            android:id="@+id/reject"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

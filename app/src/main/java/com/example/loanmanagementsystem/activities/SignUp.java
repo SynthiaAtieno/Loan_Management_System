@@ -41,7 +41,7 @@ public class SignUp extends AppCompatActivity {
         usernametxt = findViewById(R.id.signup_username);
         emailtxt = findViewById(R.id.signup_email);
         passwordtxt = findViewById(R.id.signup_password);
-        linearLayout = findViewById(R.id.linear_layout);
+        linearLayout = findViewById(R.id.linearlayout);
 
         signup = findViewById(R.id.signup_btn);
         already_have_an_account = findViewById(R.id.already_have_an_account);
@@ -89,8 +89,7 @@ public class SignUp extends AppCompatActivity {
         }
         else {
             progressDialog.show();
-            Call<ApiResponse> call = ApiClient.getApiClient().create(ApiInterface.class).performUserSignIn(username,password, email, name);
-            call.enqueue(new Callback<ApiResponse>() {
+            ApiClient.getApiClient().performUserSignIn(username,name, email, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                     if (response.isSuccessful()){
@@ -117,21 +116,15 @@ public class SignUp extends AppCompatActivity {
                     alertDialog.setTitle("Error occurred");
                     alertDialog.setMessage(t.getMessage());
                     alertDialog.show();
-
                 }
             });
+
         }
-
-
-
-
     }
-
     private void displayUserInfo(String message){
         Snackbar.make(linearLayout,message,Snackbar.LENGTH_LONG).show();
          passwordtxt.getEditText().setText("");
         progressDialog.dismiss();
-
     }
 
     @Override

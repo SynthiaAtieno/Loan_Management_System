@@ -10,6 +10,12 @@ public class ApiResponse {
     private  String message;
     @SerializedName("username")
     private String name;
+    @SerializedName("user_id")
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
 
     public String getStatus() {
         return status;

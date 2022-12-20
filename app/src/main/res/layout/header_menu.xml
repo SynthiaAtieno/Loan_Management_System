@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:padding="10dp"
-    android:background="@color/purple_500">
+    android:layout_height="150dp"
+    android:background="@color/purple_500"
+    android:padding="5dp"
+    >
 
-    <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/person"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_baseline_person_24"
+        app:civ_border_width="2dp"
         android:id="@+id/header_image"
        />
     <TextView
@@ -18,8 +20,10 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:id="@+id/text_header"
+        android:text="Synthia Ondeng"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/lobster_regular"
-        android:textColor="@color/black"
+        android:textColor="#fff"
         />
 
 </LinearLayout>

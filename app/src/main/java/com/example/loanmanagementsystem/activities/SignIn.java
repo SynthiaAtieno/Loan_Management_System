@@ -4,11 +4,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,8 +56,21 @@ public class SignIn extends AppCompatActivity {
         forgot_password = findViewById(R.id.forgot_password);
         alertDialog = new AlertDialog.Builder(this).create();
 
-        AdminSigIn();
-        performSignIn();
+        if (appConfig.isUserlogin()) {
+            String username = appConfig.getNameOfUser();
+            Intent intent = new Intent(SignIn.this, MainActivity.class);
+            intent.putExtra("username", username);
+            startActivity(intent);
+            finish();
+        }
+
+        if (appConfig.isUserlogin()) {
+            String user_id = appConfig.getUserId();
+            Intent intent = new Intent(SignIn.this, MainActivity.class);
+            intent.putExtra("user_id", user_id);
+            startActivity(intent);
+            finish();
+        }
         dont_have_an_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,17 +92,12 @@ public class SignIn extends AppCompatActivity {
         });
     }
 
-    private void performSignIn() {
+    public void performSignIn() {
 
-        if (appConfig.isUserlogin()){
-            String username = appConfig.getNameOfUser();
-            Intent intent = new Intent(SignIn.this, MainActivity.class);
-            intent.putExtra("username", username);
-            startActivity(intent);
-            finish();
-        }
-        String username, password;
+
+        String username, password, user_id;
         username = usernametxt.getEditText().getText().toString();
+
         password = passwordtxt.getEditText().getText().toString();
 
         if (username.isEmpty() && password.isEmpty()) {
@@ -97,22 +108,23 @@ public class SignIn extends AppCompatActivity {
             passwordtxt.requestFocus();
         } else {
             progressDialog.show();
-            Call<ApiResponse> call = ApiClient.getApiClient().create(ApiInterface.class).performUserLogin(username, password);
-            call.enqueue(new Callback<ApiResponse>() {
+            ApiClient.getApiClient().performUserLogin(username, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                     if (response.isSuccessful()) {
                         if (response.body().getStatus().equals("ok")) {
-                            if (isRememberUserLogin){
+                            if (isRememberUserLogin) {
                                 appConfig.updateUserLoginStatus(true);
                                 appConfig.saveNameOfUser(username);
+
+
                             }
+                            Toast.makeText(SignIn.this, "User_id"+response.body().getUserId(), Toast.LENGTH_LONG).show();
                             Toast.makeText(SignIn.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.putExtra("username", username);
                             startActivity(intent);
-                            //startActivity(new Intent(SignIn.this, MainActivity.class));
                             finish();
                         } else {
                             displayUserInfo(response.body().getMessage());
@@ -127,25 +139,20 @@ public class SignIn extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ApiResponse> call, Throwable t) {
-
+                    displayUserInfo(t.getMessage());
                 }
             });
+
         }
-
-
     }
 
-    private void AdminSigIn() {
-        if (appConfig.isUserlogin()){
-            String username = appConfig.getNameOfUser();
-            Intent intent = new Intent(SignIn.this, Admin.class);
-            intent.putExtra("username", username);
-            startActivity(intent);
-            finish();
-        }
+    public void AdminSigIn() {
+
         String username, password;
         username = usernametxt.getEditText().getText().toString();
         password = passwordtxt.getEditText().getText().toString();
+
+
 
         if (username.isEmpty() && password.isEmpty()) {
             usernametxt.getEditText().setError("username required");
@@ -155,23 +162,24 @@ public class SignIn extends AppCompatActivity {
             passwordtxt.requestFocus();
         } else {
             progressDialog.show();
-            Call<ApiResponse> call = ApiClient.getApiClient().create(ApiInterface.class).performAdminLogin(username, password);
-            call.enqueue(new Callback<ApiResponse>() {
+
+            ApiClient.getApiClient().performAdminLogin(username, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                     if (response.isSuccessful()) {
                         if (response.body().getStatus().equals("admin")) {
 
-                            if (isRememberUserLogin){
+                            if (isRememberUserLogin) {
                                 appConfig.updateUserLoginStatus(true);
                                 appConfig.saveNameOfUser(username);
+
+
                             }
                             Toast.makeText(SignIn.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             Intent intent = new Intent(getApplicationContext(), Admin.class);
                             intent.putExtra("username", username);
                             startActivity(intent);
-                            //startActivity(new Intent(SignIn.this, MainActivity.class));
                             finish();
                         } else {
                             displayUserInfo(response.body().getMessage());
@@ -186,30 +194,32 @@ public class SignIn extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ApiResponse> call, Throwable t) {
+                    displayUserInfo(t.getMessage());
 
                 }
             });
         }
-
-
     }
-
-
     private void displayUserInfo(String message) {
         Snackbar.make(linearLayout, message, Snackbar.LENGTH_SHORT).show();
         passwordtxt.getEditText().setText("");
         progressDialog.dismiss();
 
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 
-    public void checkBoxClicked(View view){
-        isRememberUserLogin = ((CheckBox)view).isChecked();
+    public void checkBoxClicked(View view) {
+        isRememberUserLogin = ((CheckBox) view).isChecked();
     }
 
+    void saveUserId(String text) {
+        SharedPreferences sharedPref = getSharedPreferences("application", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("EMAIL", text);
+        editor.apply();
+    }
 
 }

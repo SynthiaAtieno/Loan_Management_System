@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/admin_all_loans"
+        android:icon="@drawable/home"
+        android:title="All Loans" />
+    <item
+        android:id="@+id/admin_loan_approved"
+        android:icon="@drawable/approved"
+        android:title="Approved" />
+
+    <item
+        android:id="@+id/admin_loan_rejected"
+        android:icon="@drawable/rejected"
+        android:title="Rejected" />
+
+    <item
+        android:id="@+id/admin_loan_inprogress"
+        android:icon="@drawable/inprogress"
+        android:title="Pending" />
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/logout"
+        android:title="Logout" />
+</menu>
