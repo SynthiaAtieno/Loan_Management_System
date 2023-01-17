@@ -2,6 +2,7 @@ package com.example.loanmanagementsystem.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -67,9 +69,22 @@ public class MainActivity extends AppCompatActivity {
                             return true;
 
                         case R.id.nav_logout:
-                            appConfig.updateUserLoginStatus(false);
-                            startActivity(new Intent(MainActivity.this, SignIn.class));
-                            finish();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setMessage("Do you want to quit?");
+                            builder.setTitle("Alert");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Yes",(DialogInterface.OnClickListener) (dialog, which) ->{
+                                appConfig.updateUserLoginStatus(false);
+                                startActivity(new Intent(MainActivity.this, SignIn.class));
+                                finish();
+                            });
+                            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) ->
+                            {
+                               dialog.cancel();
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+
                             return  true;
                 }
                 return true;

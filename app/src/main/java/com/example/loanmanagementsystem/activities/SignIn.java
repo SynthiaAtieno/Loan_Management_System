@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,41 +74,51 @@ public class SignIn extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        dont_have_an_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SignIn.this, SignUp.class));
-                finish();
-            }
+        dont_have_an_account.setOnClickListener(view -> {
+            startActivity(new Intent(SignIn.this, SignUp.class));
+            finish();
         });
 
-        signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                performSignIn();
-                AdminSigIn();
-                progressDialog.setTitle("Processing...");
-                progressDialog.setMessage("Please wait...");
-                progressDialog.setCanceledOnTouchOutside(false);
+        signin.setOnClickListener(view -> {
+            performSignIn();
+            AdminSigIn();
+            progressDialog.setTitle("Processing...");
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setCanceledOnTouchOutside(false);
 
-            }
         });
     }
 
-    public void performSignIn() {
+   /* public boolean isOnline() {
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
+        if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
+            Toast.makeText(SignIn.this, "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }*/
+
+    public void performSignIn() {
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
         String username, password, user_id;
         username = usernametxt.getEditText().getText().toString();
 
         password = passwordtxt.getEditText().getText().toString();
 
-        if (username.isEmpty() && password.isEmpty()) {
-            usernametxt.getEditText().setError("username required");
+        if (username.isEmpty()) {
+            usernametxt.getEditText().setError("username is required");
             usernametxt.getEditText().requestFocus();
-
-            passwordtxt.getEditText().setError("password required");
+        } else if (password.isEmpty()) {
+            passwordtxt.getEditText().setError("password is required");
             passwordtxt.requestFocus();
+        } else if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
+            alertDialog.setTitle("Network Error");
+            alertDialog.setMessage("You have no internet connection");
+            alertDialog.show();
         } else {
             progressDialog.show();
             ApiClient.getApiClient().performUserLogin(username, password).enqueue(new Callback<ApiResponse>() {
@@ -119,7 +132,7 @@ public class SignIn extends AppCompatActivity {
 
 
                             }
-                            Toast.makeText(SignIn.this, "User_id"+response.body().getUserId(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignIn.this, "User_id" + response.body().getUserId(), Toast.LENGTH_LONG).show();
                             Toast.makeText(SignIn.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -128,12 +141,12 @@ public class SignIn extends AppCompatActivity {
                             finish();
                         } else {
                             displayUserInfo(response.body().getMessage());
-                            passwordtxt.getEditText().setText("");
+                            //passwordtxt.getEditText().setText("");
                         }
 
                     } else {
                         displayUserInfo(response.body().getMessage());
-                        passwordtxt.getEditText().setText("");
+                        //,passwordtxt.getEditText().setText("");
                     }
                 }
 
@@ -147,11 +160,11 @@ public class SignIn extends AppCompatActivity {
     }
 
     public void AdminSigIn() {
-
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
         String username, password;
         username = usernametxt.getEditText().getText().toString();
         password = passwordtxt.getEditText().getText().toString();
-
 
 
         if (username.isEmpty() && password.isEmpty()) {
@@ -160,6 +173,11 @@ public class SignIn extends AppCompatActivity {
 
             passwordtxt.getEditText().setError("password required");
             passwordtxt.requestFocus();
+        } else if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
+            alertDialog.setTitle("Network Error");
+            alertDialog.setMessage("You have no internet connection");
+            alertDialog.show();
+            //Toast.makeText(this, "No internet Connection", Toast.LENGTH_SHORT).show();
         } else {
             progressDialog.show();
 
@@ -194,18 +212,23 @@ public class SignIn extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ApiResponse> call, Throwable t) {
-                    displayUserInfo(t.getMessage());
+                    alertDialog.setTitle("Error occurred");
+                    alertDialog.setMessage(t.getMessage());
+                    alertDialog.show();
+                    //displayUserInfo(t.getMessage());
 
                 }
             });
         }
     }
+
     private void displayUserInfo(String message) {
         Snackbar.make(linearLayout, message, Snackbar.LENGTH_SHORT).show();
         passwordtxt.getEditText().setText("");
         progressDialog.dismiss();
 
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -35,12 +35,12 @@
             android:textSize="26sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_username"
+            android:id="@+id/signup_full_name"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Username"
+            android:hint="Full Name"
             android:outlineAmbientShadowColor="#fff"
             android:textColorHint="#fff"
             app:boxStrokeColor="#fff"
@@ -58,12 +58,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/signup_name"
+            android:id="@+id/signup_phone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Full Name"
+            android:hint="phone Number"
             android:outlineAmbientShadowColor="#fff"
             android:textColorHint="#fff"
             app:boxStrokeColor="#fff"
@@ -74,7 +74,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
+                android:inputType="number"
+                android:maxLength="10"
                 android:textColor="#fff" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Email"
+            android:hint="Email address"
             android:outlineAmbientShadowColor="#fff"
             android:textColorHint="#fff"
             app:boxStrokeColor="#fff"

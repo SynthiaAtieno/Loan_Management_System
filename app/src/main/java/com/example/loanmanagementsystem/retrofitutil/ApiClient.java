@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static String baseurl ="http://192.168.1.246/Loan_management_system/";
+    private static String baseurl ="https://loan-apps.000webhostapp.com/";
     private  static Retrofit retrofit = null;
 
     public static  ApiInterface getApiClient(){
@@ -16,8 +16,9 @@ public class ApiClient {
         }
         return retrofit.create(ApiInterface.class);
 
+
     }
-    private static String BASEURL ="http://192.168.1.246/Slim/public/index.php/";
+    private static String BASEURL ="https://loan-apps.000webhostapp.com/";
     private  static Retrofit retrofit2 = null;
 
     public static  ApiInterface getApiClient2(){

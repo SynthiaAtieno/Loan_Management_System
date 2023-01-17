@@ -4,8 +4,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -69,7 +74,19 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+   /* public boolean isOnline() {
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+
+        if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
+            Toast.makeText(SignUp.this, "No Internet connection!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;*/
+    //}
     private  void  performSignUp(){
+        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
         String username, password, name, email;
         username = usernametxt.getEditText().getText().toString();
         password = passwordtxt.getEditText().getText().toString();
@@ -86,6 +103,12 @@ public class SignUp extends AppCompatActivity {
             emailtxt.getEditText().requestFocus();
             displayUserInfo("Please fill all the fields");
 
+        }
+        else if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+            alertDialog.setTitle("Network Error");
+            alertDialog.setMessage("You have no internet connection");
+            alertDialog.show();
+            //Toast.makeText(SignUp.this, "No Internet connection!", Toast.LENGTH_LONG).show();
         }
         else {
             progressDialog.show();
