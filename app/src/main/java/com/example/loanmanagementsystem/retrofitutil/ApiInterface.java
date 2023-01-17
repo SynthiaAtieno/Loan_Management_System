@@ -23,12 +23,12 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("signup.php")
-    Call<ApiResponse> performUserSignIn(@Field("username") String username, @Field("name")String nane, @Field("email") String Password, @Field("password") String email);
+    Call<ApiResponse> performUserSignIn(@Field("phone") String phone, @Field("fullname")String fullname, @Field("email") String Password, @Field("password") String email);
 
     @FormUrlEncoded
     //api endpoint
     @POST("login.php")
-    Call<ApiResponse> performUserLogin(@Field("username")String username, @Field("password") String password);
+    Call<ApiResponse> performUserLogin(@Field("phone")String phone, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("admin.php")

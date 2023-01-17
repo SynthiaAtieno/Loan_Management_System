@@ -8,8 +8,8 @@ public class ApiResponse {
     private  String status;
     @SerializedName("message")
     private  String message;
-    @SerializedName("username")
-    private String name;
+    @SerializedName("fullname")
+    private String fullname;
     @SerializedName("user_id")
     private String userId;
 
@@ -26,6 +26,6 @@ public class ApiResponse {
     }
 
     public String getName() {
-        return name;
+        return fullname;
     }
 }

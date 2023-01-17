@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
-    TextInputLayout nametxt,usernametxt,emailtxt, passwordtxt;
+    TextInputLayout fullnametxt,phonetxt,emailtxt, passwordtxt;
     Button signup;
     TextView already_have_an_account;
     ProgressDialog progressDialog;
@@ -42,8 +42,8 @@ public class SignUp extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         progressDialog = new ProgressDialog(this);
-        nametxt = findViewById(R.id.signup_name);
-        usernametxt = findViewById(R.id.signup_username);
+        fullnametxt = findViewById(R.id.signup_full_name);
+        phonetxt = findViewById(R.id.signup_phone);
         emailtxt = findViewById(R.id.signup_email);
         passwordtxt = findViewById(R.id.signup_password);
         linearLayout = findViewById(R.id.linearlayout);
@@ -87,18 +87,18 @@ public class SignUp extends AppCompatActivity {
     private  void  performSignUp(){
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
-        String username, password, name, email;
-        username = usernametxt.getEditText().getText().toString();
+        String fullname, password, phone, email;
+        phone = phonetxt.getEditText().getText().toString();
         password = passwordtxt.getEditText().getText().toString();
-        name = nametxt.getEditText().getText().toString();
+        fullname = fullnametxt.getEditText().getText().toString();
         email = emailtxt.getEditText().getText().toString();
-        if (username.isEmpty() && password.isEmpty() && name.isEmpty() && email.isEmpty()){
-            usernametxt.getEditText().setError("username required");
-            usernametxt.getEditText().requestFocus();
+        if (phone.isEmpty() && password.isEmpty() && fullname.isEmpty() && email.isEmpty()){
+            phonetxt.getEditText().setError("phone is required");
+            phonetxt.getEditText().requestFocus();
             passwordtxt.getEditText().setError("password required");
             passwordtxt.getEditText().requestFocus();
-            nametxt.getEditText().setError("name required");
-            nametxt.getEditText().requestFocus();
+            fullnametxt.getEditText().setError("full name is required");
+            fullnametxt.getEditText().requestFocus();
             emailtxt.getEditText().setError("email required");
             emailtxt.getEditText().requestFocus();
             displayUserInfo("Please fill all the fields");
@@ -112,7 +112,7 @@ public class SignUp extends AppCompatActivity {
         }
         else {
             progressDialog.show();
-            ApiClient.getApiClient().performUserSignIn(username,name, email, password).enqueue(new Callback<ApiResponse>() {
+            ApiClient.getApiClient().performUserSignIn(phone,fullname, email, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                     if (response.isSuccessful()){
@@ -126,11 +126,11 @@ public class SignUp extends AppCompatActivity {
 
                         }else {
                             displayUserInfo(response.body().getMessage());
-                            passwordtxt.getEditText().setText("");
+                            //passwordtxt.getEditText().setText("");
                         }
                     }else {
                         displayUserInfo(response.body().getMessage());
-                        passwordtxt.getEditText().setText("");
+                        //passwordtxt.getEditText().setText("");
                     }
                 }
 

@@ -32,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignIn extends AppCompatActivity {
-    TextInputLayout usernametxt, passwordtxt;
+    TextInputLayout phonetxt, passwordtxt;
     Button signin;
     TextView dont_have_an_account, forgot_password;
     private boolean isRememberUserLogin = false;
@@ -52,7 +52,7 @@ public class SignIn extends AppCompatActivity {
         linearLayout = findViewById(R.id.linear_layout);
 
         progressDialog = new ProgressDialog(this);
-        usernametxt = findViewById(R.id.signin_username);
+        phonetxt = findViewById(R.id.signin_username);
         passwordtxt = findViewById(R.id.signin_password);
         signin = findViewById(R.id.signIn_btn);
         dont_have_an_account = findViewById(R.id.dont_have_an_account);
@@ -104,14 +104,14 @@ public class SignIn extends AppCompatActivity {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
 
-        String username, password, user_id;
-        username = usernametxt.getEditText().getText().toString();
+        String phone, password, user_id;
+        phone = phonetxt.getEditText().getText().toString();
 
         password = passwordtxt.getEditText().getText().toString();
 
-        if (username.isEmpty()) {
-            usernametxt.getEditText().setError("username is required");
-            usernametxt.getEditText().requestFocus();
+        if (phone.isEmpty()) {
+            phonetxt.getEditText().setError("username is required");
+            phonetxt.getEditText().requestFocus();
         } else if (password.isEmpty()) {
             passwordtxt.getEditText().setError("password is required");
             passwordtxt.requestFocus();
@@ -121,14 +121,14 @@ public class SignIn extends AppCompatActivity {
             alertDialog.show();
         } else {
             progressDialog.show();
-            ApiClient.getApiClient().performUserLogin(username, password).enqueue(new Callback<ApiResponse>() {
+            ApiClient.getApiClient().performUserLogin(phone, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                     if (response.isSuccessful()) {
                         if (response.body().getStatus().equals("ok")) {
                             if (isRememberUserLogin) {
                                 appConfig.updateUserLoginStatus(true);
-                                appConfig.saveNameOfUser(username);
+                                appConfig.saveNameOfUser(response.body().getName());
 
 
                             }
@@ -136,7 +136,7 @@ public class SignIn extends AppCompatActivity {
                             Toast.makeText(SignIn.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            intent.putExtra("username", username);
+                            intent.putExtra("username", response.body().getName());
                             startActivity(intent);
                             finish();
                         } else {
@@ -162,14 +162,14 @@ public class SignIn extends AppCompatActivity {
     public void AdminSigIn() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
-        String username, password;
-        username = usernametxt.getEditText().getText().toString();
+        String phone, password;
+        phone = phonetxt.getEditText().getText().toString();
         password = passwordtxt.getEditText().getText().toString();
 
 
-        if (username.isEmpty() && password.isEmpty()) {
-            usernametxt.getEditText().setError("username required");
-            usernametxt.getEditText().requestFocus();
+        if (phone.isEmpty() && password.isEmpty()) {
+            phonetxt.getEditText().setError("username required");
+            phonetxt.getEditText().requestFocus();
 
             passwordtxt.getEditText().setError("password required");
             passwordtxt.requestFocus();
@@ -181,7 +181,7 @@ public class SignIn extends AppCompatActivity {
         } else {
             progressDialog.show();
 
-            ApiClient.getApiClient().performAdminLogin(username, password).enqueue(new Callback<ApiResponse>() {
+            ApiClient.getApiClient().performAdminLogin(phone, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                     if (response.isSuccessful()) {
@@ -189,14 +189,14 @@ public class SignIn extends AppCompatActivity {
 
                             if (isRememberUserLogin) {
                                 appConfig.updateUserLoginStatus(true);
-                                appConfig.saveNameOfUser(username);
+                                appConfig.saveNameOfUser(phone);
 
 
                             }
                             Toast.makeText(SignIn.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             Intent intent = new Intent(getApplicationContext(), Admin.class);
-                            intent.putExtra("username", username);
+                            intent.putExtra("username", phone);
                             startActivity(intent);
                             finish();
                         } else {

@@ -52,14 +52,16 @@
                 app:boxStrokeColor="#fff"
                 app:endIconMode="clear_text"
                 app:hintTextColor="#fff"
+                app:prefixText="+254"
+                app:prefixTextColor="@color/white"
                 app:startIconDrawable="@drawable/ic_baseline_person_24">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:inputType="number"
                     android:textColor="#fff"
-                    android:maxLength="10"
+                    android:maxLength="9"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -86,12 +88,12 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                android:padding="2dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="2dp">-->
 
                 <CheckBox
                     android:id="@+id/remember_me"
@@ -101,6 +103,7 @@
                     android:gravity="end"
                     android:onClick="checkBoxClicked"
                     android:text="Remember me"
+                    android:visibility="gone"
                     android:textColor="#fff"
                     android:textSize="18sp" />
 
@@ -109,12 +112,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="12dp"
                     android:text="Forgot Password"
                     android:textColor="#fff"
                     android:textSize="18sp" />
 
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
             <Button
                 android:id="@+id/signIn_btn"

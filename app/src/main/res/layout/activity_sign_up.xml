@@ -57,6 +57,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signup_phone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -68,14 +69,16 @@
             android:textColorHint="#fff"
             app:boxStrokeColor="#fff"
             app:hintTextColor="#fff"
+            app:prefixText="+254"
+            app:prefixTextColor="@color/white"
             app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic_baseline_person_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="number"
-                android:maxLength="10"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:maxLength="9"
                 android:textColor="#fff" />
 
         </com.google.android.material.textfield.TextInputLayout>
