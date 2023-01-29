@@ -1,69 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_500"
+    android:background="#2ACDBCBC"
     android:orientation="vertical"
     tools:context=".userFragments.AppliedLoans">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#04000000"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="6dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="18dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/c_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/profile_image"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/c_image"
+                android:text="Hello"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/hello"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-
-            <TextView
-                android:id="@+id/txt_hello"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
-                android:fontFamily="@font/lobster_regular"
-                android:shadowColor="#3E603030"
-                android:shadowDx="6"
-                android:shadowDy="10"
-                android:shadowRadius="14"
-                android:text="Welcome"
-                android:textColor="#fff"
-                android:textSize="30sp" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
-                android:id="@+id/txt_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_toEndOf="@+id/txt_hello"
-                android:fontFamily="@font/lobster_regular"
-                android:shadowColor="#3E603030"
-                android:shadowDx="6"
-                android:shadowDy="10"
-                android:shadowRadius="14"
-                android:text="Synthia"
-                android:textColor="#fff"
-                android:textSize="30sp" />
+                android:text="My Loans"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/totalLoans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Loans"
+                android:textColor="#000"
+                android:textSize="16sp" />
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        <ScrollView
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/header_background"
-                tools:listitem="@layout/list_items" />
-        </ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Approved Loans"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/totalApprovedLoans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pending Loans"
+                android:textColor="#000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/totalLoansPending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
 </LinearLayout>

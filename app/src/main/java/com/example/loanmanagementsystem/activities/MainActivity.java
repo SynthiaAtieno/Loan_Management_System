@@ -90,33 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-       // toolbar = findViewById(R.id.toolbar);
-        //txtmain = findViewById(R.id.txt_main);
-        //setSupportActionBar(toolbar);
-     /*   drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.nav_view);
-
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-        //drawerLayout.openDrawer(GravityCompat.START);
-
-        *//*String username = getIntent().getStringExtra("username");
-        txtmain.setText("Hi! "+username);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                appConfig.updateUserLoginStatus(false);
-                startActivity(new Intent(MainActivity.this, SignIn.class));
-                finish();
-            }
-        });*/
-
    }
 
    private void  replaceFragment(Fragment fragment){

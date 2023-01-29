@@ -1,5 +1,6 @@
 package com.example.loanmanagementsystem.retrofitutil;
 
+import com.example.loanmanagementsystem.TotalLoans;
 import com.example.loanmanagementsystem.models.ProfileModel;
 import com.example.loanmanagementsystem.models.ApiResponse;
 import com.example.loanmanagementsystem.models.ApplyLoan;
@@ -35,8 +36,8 @@ public interface ApiInterface {
     Call<ApiResponse> performAdminLogin(@Field("username") String username, @Field("password") String password);
 
 
-    @GET("getLoan/{id}")
-    Call<List<Loan>> fetchLoans(@Query("user_id") String userid);
+    @POST("totalLoan.php")
+    Call<TotalLoans> fetchLoan(@Query("user_id") String userid);
 
     @GET("getappliedloans.php")
     Call<List<Loan>> getLoan();

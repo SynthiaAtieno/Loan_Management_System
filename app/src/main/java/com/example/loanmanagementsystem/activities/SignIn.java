@@ -60,20 +60,22 @@ public class SignIn extends AppCompatActivity {
         alertDialog = new AlertDialog.Builder(this).create();
 
         if (appConfig.isUserlogin()) {
+            String user_id = appConfig.getUserId();
             String username = appConfig.getNameOfUser();
             Intent intent = new Intent(SignIn.this, MainActivity.class);
             intent.putExtra("username", username);
+            intent.putExtra("user_id", user_id);
             startActivity(intent);
             finish();
         }
 
-        if (appConfig.isUserlogin()) {
+      /*  if (appConfig.isUserlogin()) {
             String user_id = appConfig.getUserId();
             Intent intent = new Intent(SignIn.this, MainActivity.class);
             intent.putExtra("user_id", user_id);
             startActivity(intent);
             finish();
-        }
+        }*/
         dont_have_an_account.setOnClickListener(view -> {
             startActivity(new Intent(SignIn.this, SignUp.class));
             finish();
@@ -88,17 +90,6 @@ public class SignIn extends AppCompatActivity {
 
         });
     }
-
-   /* public boolean isOnline() {
-        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
-
-        if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
-            Toast.makeText(SignIn.this, "No Internet connection!", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;
-    }*/
 
     public void performSignIn() {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -119,20 +110,22 @@ public class SignIn extends AppCompatActivity {
             alertDialog.setTitle("Network Error");
             alertDialog.setMessage("You have no internet connection");
             alertDialog.show();
-        } else {
+        }
+        else {
             progressDialog.show();
             ApiClient.getApiClient().performUserLogin(phone, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                     if (response.isSuccessful()) {
                         if (response.body().getStatus().equals("ok")) {
-                            if (isRememberUserLogin) {
+                            /*if (isRememberUserLogin) {*/
                                 appConfig.updateUserLoginStatus(true);
                                 appConfig.saveNameOfUser(response.body().getName());
+                                appConfig.saveUserId(response.body().getUserId());
 
 
-                            }
-                            Toast.makeText(SignIn.this, "User_id" + response.body().getUserId(), Toast.LENGTH_LONG).show();
+                            //}
+                            //Toast.makeText(SignIn.this, "User_id" + response.body().getUserId(), Toast.LENGTH_LONG).show();
                             Toast.makeText(SignIn.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -189,24 +182,26 @@ public class SignIn extends AppCompatActivity {
 
                             if (isRememberUserLogin) {
                                 appConfig.updateUserLoginStatus(true);
-                                appConfig.saveNameOfUser(phone);
+                                appConfig.saveNameOfUser(response.body().getName());
+                                appConfig.saveUserId(response.body().getUserId());
+
 
 
                             }
                             Toast.makeText(SignIn.this, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             Intent intent = new Intent(getApplicationContext(), Admin.class);
-                            intent.putExtra("username", phone);
+                            intent.putExtra("username", appConfig.getNameOfUser());
                             startActivity(intent);
                             finish();
                         } else {
                             displayUserInfo(response.body().getMessage());
-                            passwordtxt.getEditText().setText("");
+                            //passwordtxt.getEditText().setText("");
                         }
 
                     } else {
                         displayUserInfo(response.body().getMessage());
-                        passwordtxt.getEditText().setText("");
+                        //passwordtxt.getEditText().setText("");
                     }
                 }
 
@@ -224,7 +219,7 @@ public class SignIn extends AppCompatActivity {
 
     private void displayUserInfo(String message) {
         Snackbar.make(linearLayout, message, Snackbar.LENGTH_SHORT).show();
-        passwordtxt.getEditText().setText("");
+        //passwordtxt.getEditText().setText("");
         progressDialog.dismiss();
 
     }
@@ -234,9 +229,9 @@ public class SignIn extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void checkBoxClicked(View view) {
+   /* public void checkBoxClicked(View view) {
         isRememberUserLogin = ((CheckBox) view).isChecked();
-    }
+    }*/
 
     void saveUserId(String text) {
         SharedPreferences sharedPref = getSharedPreferences("application", Context.MODE_PRIVATE);

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loanmanagementsystem.OTP;
 import com.example.loanmanagementsystem.R;
 import com.example.loanmanagementsystem.models.ApiResponse;
 import com.example.loanmanagementsystem.retrofitutil.ApiClient;
@@ -68,22 +69,11 @@ public class SignUp extends AppCompatActivity {
                 progressDialog.setTitle("Processing...");
                 progressDialog.setMessage("Please wait...");
                 progressDialog.setCanceledOnTouchOutside(false);
-                //progressDialog.show();
             }
         });
 
     }
 
-   /* public boolean isOnline() {
-        ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
-
-        if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
-            Toast.makeText(SignUp.this, "No Internet connection!", Toast.LENGTH_LONG).show();
-            return false;
-        }
-        return true;*/
-    //}
     private  void  performSignUp(){
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
@@ -92,18 +82,29 @@ public class SignUp extends AppCompatActivity {
         password = passwordtxt.getEditText().getText().toString();
         fullname = fullnametxt.getEditText().getText().toString();
         email = emailtxt.getEditText().getText().toString();
-        if (phone.isEmpty() && password.isEmpty() && fullname.isEmpty() && email.isEmpty()){
-            phonetxt.getEditText().setError("phone is required");
-            phonetxt.getEditText().requestFocus();
-            passwordtxt.getEditText().setError("password required");
-            passwordtxt.getEditText().requestFocus();
+        if (fullname.isEmpty()){
             fullnametxt.getEditText().setError("full name is required");
             fullnametxt.getEditText().requestFocus();
-            emailtxt.getEditText().setError("email required");
-            emailtxt.getEditText().requestFocus();
-            displayUserInfo("Please fill all the fields");
+        }
+
+        else if (phone.isEmpty()){
+            phonetxt.getEditText().setError("phone is required");
+            phonetxt.getEditText().requestFocus();
 
         }
+        else if (email.isEmpty()){
+            emailtxt.getEditText().setError("email required");
+            emailtxt.getEditText().requestFocus();
+        }
+        else if (!(Patterns.EMAIL_ADDRESS.matcher(email).matches())){
+            emailtxt.getEditText().setError("Please enter a valid email");
+            emailtxt.requestFocus();
+        }
+        else if (password.isEmpty()){
+            passwordtxt.getEditText().setError("password required");
+            passwordtxt.getEditText().requestFocus();
+        }
+
         else if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
             alertDialog.setTitle("Network Error");
             alertDialog.setMessage("You have no internet connection");
@@ -112,6 +113,7 @@ public class SignUp extends AppCompatActivity {
         }
         else {
             progressDialog.show();
+
             ApiClient.getApiClient().performUserSignIn(phone,fullname, email, password).enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
@@ -121,7 +123,8 @@ public class SignUp extends AppCompatActivity {
                         {
                             Toast.makeText(SignUp.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
-                            startActivity(new Intent(SignUp.this, SignIn.class));
+                            startActivity(new Intent(SignUp.this, OTP.class));
+                            //startActivity(new Intent(SignUp.this, SignIn.class));
                             finish();
 
                         }else {

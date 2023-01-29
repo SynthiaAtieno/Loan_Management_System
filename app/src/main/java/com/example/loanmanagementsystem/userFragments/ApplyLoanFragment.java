@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class ApplyLoanFragment extends Fragment {
     LinearLayout linearLayout;
     AppConfig appConfig;
     ApiResponse apiResponse = new ApiResponse();
+    AlertDialog alertDialog;
 
     public ApplyLoanFragment() {
         // Required empty public constructor
@@ -61,6 +63,7 @@ public class ApplyLoanFragment extends Fragment {
         amounttxt = view.findViewById(R.id.amount);
         descriptiontxt = view.findViewById(R.id.description);
         appConfig = new AppConfig(getContext());
+        alertDialog = new AlertDialog.Builder(getContext()).create();
 
 //        if (appConfig.isUserlogin()) {
 //            String username = appConfig.getNameOfUser();
@@ -86,7 +89,7 @@ public class ApplyLoanFragment extends Fragment {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //applyLoan();
+                applyLoan();
             }
         });
 
@@ -104,23 +107,31 @@ public class ApplyLoanFragment extends Fragment {
         amount = amounttxt.getEditText().getText().toString();
         description = descriptiontxt.getEditText().getText().toString();
 
-        if (amount.equals("") && description.equals("")) {
+        if (amount.isEmpty() && description.isEmpty()) {
             amounttxt.getEditText().setError("Please enter amount");
-            amounttxt.getEditText().requestFocus();
-
+            amounttxt.getEditText().requestFocus();}
+        else if (description.isEmpty()){
             descriptiontxt.getEditText().setError("Please describe why you want the loan");
-            descriptiontxt.requestFocus();
-        }
+            descriptiontxt.requestFocus();}
         else{
-            ApiClient.getApiClient().applyLoan(amount, description,apiResponse.getUserId(),1).enqueue(new Callback<ApplyLoan>() {
+            ApiClient.getApiClient().applyLoan(amount, description,appConfig.getUserId(),1).enqueue(new Callback<ApplyLoan>() {
                 @Override
                 public void onResponse(Call<ApplyLoan> call, Response<ApplyLoan> response) {
+                    if (response.body()!= null && response.isSuccessful()){
+                        alertDialog.setTitle("Successful");
+                        alertDialog.setMessage(response.body().getMessage());
+                        alertDialog.show();
+                        //Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
                 @Override
                 public void onFailure(Call<ApplyLoan> call, Throwable t) {
-
+                    alertDialog.setTitle("Error Occurred");
+                    alertDialog.setMessage(t.getMessage());
+                    alertDialog.show();
+                    //Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
