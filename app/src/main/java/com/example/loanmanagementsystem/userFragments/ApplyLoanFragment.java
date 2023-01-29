@@ -121,6 +121,8 @@ public class ApplyLoanFragment extends Fragment {
                         alertDialog.setTitle("Successful");
                         alertDialog.setMessage(response.body().getMessage());
                         alertDialog.show();
+                        amounttxt.getEditText().setText("");
+                        descriptiontxt.getEditText().setText("");
                         //Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.loanmanagementsystem.userFragments.ApplyLoanFragment;
 import com.example.loanmanagementsystem.userFragments.Profile;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                             builder.setCancelable(false);
                             builder.setPositiveButton("Yes",(DialogInterface.OnClickListener) (dialog, which) ->{
                                 appConfig.updateUserLoginStatus(false);
+                                Toast.makeText(MainActivity.this, "Logged out successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(MainActivity.this, SignIn.class));
                                 finish();
                             });
