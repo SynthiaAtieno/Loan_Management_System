@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 
 public class Profile extends Fragment {
-    TextView fullname, total;
+    TextView fullname, total, overdueLoans;
     ApiResponse apiResponse = new ApiResponse();
     AppConfig appConfig;
 
@@ -56,6 +56,7 @@ public class Profile extends Fragment {
 
         getProfile();
         getTotal();
+        totalApprovedLoan();
 
     }
 
@@ -66,6 +67,7 @@ public class Profile extends Fragment {
          view =inflater.inflate(R.layout.fragment_profile, container, false);
          fullname = view.findViewById(R.id.fullname);
          total = view.findViewById(R.id.totalLoan);
+         overdueLoans = view.findViewById(R.id.overdue_loans);
         return  view;    }
 
     public void getProfile(){
@@ -94,6 +96,25 @@ public class Profile extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     //appConfig.updateUserLoginStatus(true);
                     total.setText("Ksh "+response.body().getTotal());
+                }
+                else {
+                    Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TotalLoans> call, Throwable t) {
+                Toast.makeText(getContext(), "Error"+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void totalApprovedLoan(){
+        ApiClient.getApiClient().ApprovedLoans(appConfig.getUserId()).enqueue(new Callback<TotalLoans>() {
+            @Override
+            public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    overdueLoans.setText("Ksh "+response.body().getTotal());
                 }
                 else {
                     Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();

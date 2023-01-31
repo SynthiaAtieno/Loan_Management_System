@@ -67,6 +67,8 @@ public class AppliedLoans extends Fragment {
 
         getProfile();
         fetchLoans();
+        totalApprovedLoan();
+        totalPendingLoan();
 
     }
 
@@ -75,8 +77,8 @@ public class AppliedLoans extends Fragment {
         view = inflater.inflate(R.layout.fragment_loans, container, false);
         txtname = view.findViewById(R.id.name);
         totalLoans = view.findViewById(R.id.totalLoans);
-        pendingLoans = view.findViewById(R.id.pending_loans);
-        approvedLoans = view.findViewById(R.id.approved_loans);
+        pendingLoans = view.findViewById(R.id.totalLoansPending);
+        approvedLoans = view.findViewById(R.id.totalApprovedLoans);
 
         progressDialog = new ProgressDialog(getContext());
         appConfig = new AppConfig(getContext());
@@ -138,6 +140,44 @@ public class AppliedLoans extends Fragment {
             @Override
             public void onFailure(Call<TotalLoans> call, Throwable t) {
                 Toast.makeText(getContext(), "Error Occurred" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void totalApprovedLoan(){
+        ApiClient.getApiClient().ApprovedLoans(appConfig.getUserId()).enqueue(new Callback<TotalLoans>() {
+            @Override
+            public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    approvedLoans.setText("Ksh "+response.body().getTotal());
+                }
+                else {
+                    Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TotalLoans> call, Throwable t) {
+                Toast.makeText(getContext(), "Error"+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void totalPendingLoan(){
+        ApiClient.getApiClient().PendingLoans(appConfig.getUserId()).enqueue(new Callback<TotalLoans>() {
+            @Override
+            public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    pendingLoans.setText("Ksh "+response.body().getTotal());
+                }
+                else {
+                    Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TotalLoans> call, Throwable t) {
+                Toast.makeText(getContext(), "Error"+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -44,6 +44,7 @@
         android:layout_below="@+id/first_layout"
         android:padding="12dp"
         android:layout_marginTop="25dp"
+        app:cardCornerRadius="6dp"
         app:cardElevation="16dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +58,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/profile_image"
-                app:civ_border_color="@color/purple_500"
+                app:civ_border_color="@color/black"
                 app:civ_border_width="2dp" />
 
             <TextView
@@ -90,8 +91,10 @@
             android:layout_below="@+id/first_layout"
             android:padding="12dp"
             android:layout_marginTop="45dp"
+            app:cardCornerRadius="6dp"
+
             app:cardElevation="16dp">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -102,8 +105,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="6dp"
+                    android:layout_alignParentStart="true"
                     android:gravity="center"
-                    android:layout_marginRight="24dp"
                     android:orientation="vertical"
                     >
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -120,12 +123,11 @@
                         android:id="@+id/totalLoan"
                         android:textStyle="bold"
                         android:textColor="#000"
-                        android:text="$3 675"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
+                        android:textSize="20sp"
                         android:textColor="#000"
                         android:text="Total Loan"
                         />
@@ -135,8 +137,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="6dp"
-                    android:layout_marginRight="24dp"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="vertical"
                     >
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -166,6 +168,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:padding="6dp"
                     android:gravity="center"
                     android:orientation="vertical"
@@ -175,26 +178,26 @@
                         android:layout_height="50dp"
                         app:civ_border_width="1dp"
                         app:civ_border_color="@color/white"
-                        android:src="@drawable/person" />
+                        android:src="@drawable/ic_baseline_currency_rupee_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
+                        android:id="@+id/overdue_loans"
                         android:textStyle="bold"
                         android:textColor="#000"
-                        android:text="$3 675"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
                         android:textColor="#000"
-                        android:text="Overdue"
+                        android:text="Overdue Loan"
                         />
 
                 </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 

@@ -39,6 +39,12 @@ public interface ApiInterface {
     @GET("totalLoan.php")
     Call<TotalLoans> fetchLoan(@Query("user_id") String user_id);
 
+    @GET("approvedLoanForSingleUser.php")
+    Call<TotalLoans> ApprovedLoans(@Query("user_id") String user_id);
+
+    @GET("pendingLoans.php")
+    Call<TotalLoans> PendingLoans(@Query("user_id") String user_id);
+
     @GET("getappliedloans.php")
     Call<List<Loan>> getLoan();
 
