@@ -93,7 +93,7 @@ public class Profile extends Fragment {
             public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
                 if (response.isSuccessful() && response.body() != null){
                     //appConfig.updateUserLoginStatus(true);
-                    total.setText(response.body().getTotal());
+                    total.setText("Ksh "+response.body().getTotal());
                 }
                 else {
                     Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();

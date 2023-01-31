@@ -36,8 +36,8 @@ public interface ApiInterface {
     Call<ApiResponse> performAdminLogin(@Field("username") String username, @Field("password") String password);
 
 
-    @POST("totalLoan.php")
-    Call<TotalLoans> fetchLoan(@Query("user_id") String userid);
+    @GET("totalLoan.php")
+    Call<TotalLoans> fetchLoan(@Query("user_id") String user_id);
 
     @GET("getappliedloans.php")
     Call<List<Loan>> getLoan();

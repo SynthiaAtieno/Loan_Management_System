@@ -78,6 +78,7 @@ public class AppliedLoans extends Fragment {
         pendingLoans = view.findViewById(R.id.pending_loans);
         approvedLoans = view.findViewById(R.id.approved_loans);
 
+        progressDialog = new ProgressDialog(getContext());
         appConfig = new AppConfig(getContext());
         return view;
     }
@@ -119,9 +120,13 @@ public class AppliedLoans extends Fragment {
             public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        getAppliedLoans();
-                        totalLoans.setText(response.body().getTotal());
+                        /*progressDialog.setTitle("Getting Loans");
+                        progressDialog.setMessage("Please wait...");
+                        progressDialog.setCanceledOnTouchOutside(false);
+                        progressDialog.show();*/
+                        totalLoans.setText("Ksh "+response.body().getTotal());
                     } else {
+                        //progressDialog.dismiss();
                         Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
                     }
 
@@ -137,14 +142,6 @@ public class AppliedLoans extends Fragment {
         });
     }
 
-    private void getAppliedLoans() {
-        progressDialog.setTitle("Getting Loans");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
-
-
-    }
 
     private void displayUserInfo(String message) {
        /* Snackbar.make(relativeLayout, message, Snackbar.LENGTH_LONG).show();
