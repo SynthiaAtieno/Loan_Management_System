@@ -40,7 +40,7 @@ public class RejectedLoansAdapter extends RecyclerView.Adapter<RejectedLoansAdap
 
         holder.user_id.setText(loans.getUserId());
         holder.description.setText(loans.getDescription());
-        holder.amount.setText(loans.getAmount());
+        holder.amount.setText("Ksh."+loans.getAmount()+".00");
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
     }

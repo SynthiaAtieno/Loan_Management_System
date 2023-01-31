@@ -1,5 +1,6 @@
 package com.example.loanmanagementsystem.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +9,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.loanmanagementsystem.ApproveLoan;
 import com.example.loanmanagementsystem.R;
 import com.example.loanmanagementsystem.models.InProgressLoans;
 
 import java.util.List;
 
 public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.MyViewHolder> {
-    List<InProgressLoans> inProgressLoansList;
+    private List<InProgressLoans> inProgressLoansList;
 
     public InprogressAdapter(List<InProgressLoans> inProgressLoansList) {
         this.inProgressLoansList = inProgressLoansList;
@@ -45,7 +48,7 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
         }
        // holder.user_id.setText(loans.getUserId());
         holder.description.setText(loans.getDescription());
-        holder.amount.setText(loans.getAmount());
+        holder.amount.setText("Ksh "+loans.getAmount());
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
         holder.loan_id.setText(loans.getLoanId());
@@ -56,6 +59,19 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
                 loans.setStatus("Approved");
             }
         });
+        holder.mainCards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ApproveLoan.class);
+                intent.putExtra("name",loans.getName());
+                intent.putExtra("amount","Ksh."+loans.getAmount()+".00");
+                intent.putExtra("description",loans.getDescription());
+                intent.putExtra("status",loans.getStatus());
+                intent.putExtra("loanId", loans.getLoanId());
+                view.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -66,6 +82,7 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView amount, description, status, name, user_id, loan_id;
         Button approve, reject;
+        CardView mainCards;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +92,7 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
             name = itemView.findViewById(R.id.txt_name);
             //user_id = itemView.findViewById(R.id.loan_id);
             loan_id = itemView.findViewById(R.id.txt_loan_id);
+            mainCards = itemView.findViewById(R.id.mainCard);
 
 
             approve = itemView.findViewById(R.id.approve);

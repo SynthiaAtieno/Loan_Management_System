@@ -1,7 +1,9 @@
 package com.example.loanmanagementsystem.adminFragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.loanmanagementsystem.R;
@@ -28,10 +31,12 @@ public class InProrgressLoan extends Fragment {
 
     View view;
     RecyclerView recyclerView;
+    ListView inprogressList;
     List<InProgressLoans> inProgressLoansList = new ArrayList<>();
     //List<Loan> loanList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
     InprogressAdapter adapter;
+    CardView mainCard;
 
 
     public InProrgressLoan() {
@@ -64,7 +69,13 @@ public class InProrgressLoan extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new InprogressAdapter(inProgressLoansList);
         recyclerView.setAdapter(adapter);
+
+
+
+
+
         return view;
+
     }
 
     private void getInProgressLoans() {
@@ -72,11 +83,12 @@ public class InProrgressLoan extends Fragment {
             @Override
             public void onResponse(Call<List<InProgressLoans>> call, Response<List<InProgressLoans>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
                     inProgressLoansList.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 }
-            }
 
+            }
             @Override
             public void onFailure(Call<List<InProgressLoans>> call, Throwable t) {
                 Toast.makeText(getContext(), "Error occurred: "+t.getMessage(), Toast.LENGTH_SHORT).show();

@@ -43,7 +43,7 @@ public class ApprovedLoanAdapter extends RecyclerView.Adapter<ApprovedLoanAdapte
 
         holder.loan_id.setText(loans.getLoanId());
         holder.description.setText(loans.getDescription());
-        holder.amount.setText(loans.getAmount());
+        holder.amount.setText("Ksh."+loans.getAmount()+".00");
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
     }

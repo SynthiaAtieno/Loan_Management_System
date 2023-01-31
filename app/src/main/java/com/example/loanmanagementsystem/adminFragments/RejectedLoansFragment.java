@@ -54,7 +54,7 @@ public class RejectedLoansFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_rejected_loans, container, false);
+        //view = inflater.inflate(R.layout.fragment_rejected_loans, container, false);
 
         view = inflater.inflate(R.layout.fragment_approved_loans, container, false);
         recyclerView = view.findViewById(R.id.recyclerview);

@@ -1,5 +1,6 @@
 package com.example.loanmanagementsystem.retrofitutil;
 
+import com.example.loanmanagementsystem.models.Approve;
 import com.example.loanmanagementsystem.models.TotalLoans;
 import com.example.loanmanagementsystem.models.ApiResponse;
 import com.example.loanmanagementsystem.models.ApplyLoan;
@@ -49,6 +50,12 @@ public interface ApiInterface {
 
     @GET("loanInProgress.php")
     Call<List<InProgressLoans>> getInProgressLoan();
+
+    @GET("approveLoan.php")
+    Call<Approve> approveLoan(@Query("loan_id") String loan_id);
+
+    @GET("rejectLoan.php")
+    Call<Approve> rejectLoan(@Query("loan_id") String loan_id);
 
     @GET("approvedLoans.php")
     Call<List<ApprovedLoans>> getApprovedLoan();

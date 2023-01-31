@@ -15,7 +15,7 @@ public class ApprovedLoans {
     @SerializedName("description")
     @Expose
     private String description;
-    @SerializedName("name")
+    @SerializedName("fullname")
     @Expose
     private String name;
     @SerializedName("status")

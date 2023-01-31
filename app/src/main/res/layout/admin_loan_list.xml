@@ -10,22 +10,21 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="24dp"
     >
-    <LinearLayout
+   <!-- <LinearLayout
         android:background="@drawable/loan_background"
         android:layout_width="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_height="100dp">
-<!--        <TextView-->
-<!--            android:textAlignment="textStart"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="39dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Applied"/>-->
-    </LinearLayout>
+        <TextView
+            android:textAlignment="textStart"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:textSize="39dp"
+            android:layout_height="wrap_content"
+            android:text="Applied"/>
+    </LinearLayout>-->
     <LinearLayout
-        android:background="#69191613"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -38,6 +37,7 @@
                 android:layout_alignParentLeft="true"
                 android:shadowDy="10"
                 android:shadowDx="6"
+                android:visibility="gone"
                 android:shadowRadius="14"
                 android:layout_marginStart="18dp"
                 android:drawablePadding="8dp"
@@ -46,23 +46,24 @@
                 android:text="Loan Id"
                 android:textColor="#fff"
                 android:textSize="30sp" />
+        <TextView
+            android:id="@+id/txt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_description"
+            android:inputType="text"
+            android:textColor="#000"
+            android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txt_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/loan_id"
-                android:shadowDy="10"
-                android:shadowDx="6"
-                android:shadowRadius="14"
-                android:drawableStart="@drawable/ic_baseline_currency_bitcoin_24"
-                android:drawablePadding="8dp"
-                android:shadowColor="#000"
                 android:inputType="number"
-                android:text="Amount"
                 android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="30sp" />
+                android:textColor="#000"
+                android:textSize="16sp" />
 
 
             <TextView
@@ -77,16 +78,7 @@
                 android:textSize="16sp" />
 
 
-            <TextView
-                android:id="@+id/txt_name"
-                android:layout_width="wrap_content"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/txt_description"
-                android:inputType="text"
-                android:textColor="#000"
-                android:text="name"
-                android:textSize="16sp" />
+
 
         <TextView
             android:id="@+id/txt_userId"
