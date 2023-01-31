@@ -1,7 +1,5 @@
 package com.example.loanmanagementsystem.userFragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,11 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.loanmanagementsystem.TotalLoans;
-import com.example.loanmanagementsystem.activities.MainActivity;
-import com.example.loanmanagementsystem.adapter.ProfileRecyclerview;
+import com.example.loanmanagementsystem.models.TotalLoans;
 import com.example.loanmanagementsystem.R;
-import com.example.loanmanagementsystem.activities.SignIn;
 import com.example.loanmanagementsystem.apputil.AppConfig;
 import com.example.loanmanagementsystem.models.ApiResponse;
 import com.example.loanmanagementsystem.retrofitutil.ApiClient;

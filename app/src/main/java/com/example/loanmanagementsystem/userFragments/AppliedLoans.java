@@ -1,11 +1,8 @@
 package com.example.loanmanagementsystem.userFragments;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,23 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loanmanagementsystem.R;
-import com.example.loanmanagementsystem.TotalLoans;
-import com.example.loanmanagementsystem.activities.Admin;
+import com.example.loanmanagementsystem.models.TotalLoans;
 import com.example.loanmanagementsystem.adapter.RecyclerViewAdapter;
 import com.example.loanmanagementsystem.apputil.AppConfig;
 import com.example.loanmanagementsystem.models.ApiResponse;
 import com.example.loanmanagementsystem.models.Loan;
 import com.example.loanmanagementsystem.retrofitutil.ApiClient;
-import com.example.loanmanagementsystem.retrofitutil.ApiInterface;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

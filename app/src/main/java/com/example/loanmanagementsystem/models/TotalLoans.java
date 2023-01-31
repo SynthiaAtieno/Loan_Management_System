@@ -1,4 +1,4 @@
-package com.example.loanmanagementsystem;
+package com.example.loanmanagementsystem.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
