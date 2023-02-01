@@ -30,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUp extends AppCompatActivity {
-    TextInputLayout fullnametxt,phonetxt,emailtxt, passwordtxt;
+    TextInputLayout fullnametxt,phonetxt,emailtxt, passwordtxt, conpass;
     Button signup;
     TextView already_have_an_account;
     ProgressDialog progressDialog;
@@ -48,6 +48,7 @@ public class SignUp extends AppCompatActivity {
         emailtxt = findViewById(R.id.signup_email);
         passwordtxt = findViewById(R.id.signup_password);
         linearLayout = findViewById(R.id.linearlayout);
+        conpass = findViewById(R.id.signup_conPassword);
 
         signup = findViewById(R.id.signup_btn);
         already_have_an_account = findViewById(R.id.already_have_an_account);
@@ -77,11 +78,12 @@ public class SignUp extends AppCompatActivity {
     private  void  performSignUp(){
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
-        String fullname, password, phone, email;
+        String fullname, password, phone, email, confirmPassword;
         phone = phonetxt.getEditText().getText().toString();
         password = passwordtxt.getEditText().getText().toString();
         fullname = fullnametxt.getEditText().getText().toString();
         email = emailtxt.getEditText().getText().toString();
+        confirmPassword = conpass.getEditText().getText().toString();
         if (fullname.isEmpty()){
             fullnametxt.getEditText().setError("full name is required");
             fullnametxt.getEditText().requestFocus();
@@ -91,6 +93,10 @@ public class SignUp extends AppCompatActivity {
             phonetxt.getEditText().setError("phone is required");
             phonetxt.getEditText().requestFocus();
 
+        }
+        else if (phone.length()<9){
+            phonetxt.getEditText().setError("Please input a valid phone number");
+            phonetxt.requestFocus();
         }
         else if (email.isEmpty()){
             emailtxt.getEditText().setError("email required");
@@ -103,6 +109,10 @@ public class SignUp extends AppCompatActivity {
         else if (password.isEmpty()){
             passwordtxt.getEditText().setError("password required");
             passwordtxt.getEditText().requestFocus();
+        }
+        else if (!password.equals(confirmPassword)){
+            Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
+            conpass.requestFocus();
         }
 
         else if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
@@ -123,7 +133,7 @@ public class SignUp extends AppCompatActivity {
                         {
                             Toast.makeText(SignUp.this, ""+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             onBackPressed();
-                            startActivity(new Intent(SignUp.this, OTP.class));
+                            startActivity(new Intent(SignUp.this, SignIn.class));
                             //startActivity(new Intent(SignUp.this, SignIn.class));
                             finish();
 

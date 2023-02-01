@@ -72,7 +72,7 @@
             app:prefixText="+254"
             app:prefixTextColor="@color/white"
             app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/ic_baseline_person_24">
+            app:startIconDrawable="@drawable/phone">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -127,8 +127,32 @@
                 android:textColorHint="#fff"
                 android:textColor="#fff"
                 android:textSize="16sp" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signup_conPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Confirm Password"
+            android:outlineAmbientShadowColor="#fff"
+            android:textColorHint="#fff"
+            app:hintTextColor="#fff"
+            app:boxStrokeColor="#fff"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/ic_baseline_lock_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPassword"
+                android:textColorHint="#fff"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/signup_btn"
             android:layout_width="match_parent"
