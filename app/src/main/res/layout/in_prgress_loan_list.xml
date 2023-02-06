@@ -8,8 +8,8 @@
     android:orientation="vertical"
     android:id="@+id/mainCard"
     android:layout_marginBottom="8dp"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
     android:padding="12dp"
     app:cardCornerRadius="4dp"
     app:cardElevation="24dp"
@@ -21,14 +21,22 @@
 
     </LinearLayout>-->
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/layout1"
-            android:padding="6dp"
+            android:padding="8dp"
             android:layout_toEndOf="@+id/mainLayout"
             >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/person"
+                android:id="@+id/profile_image"
+                />
             <TextView
                 android:id="@+id/txt_loan_id"
                 android:layout_width="wrap_content"
@@ -46,24 +54,40 @@
                 android:textSize="30sp"  />
             <TextView
                 android:id="@+id/txt_name"
+                android:layout_below="@id/txt_loan_id"
                 android:layout_width="wrap_content"
+                android:layout_toEndOf="@id/profile_image"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:text="name"
                 android:textColor="#000"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txt_amount"
+                android:layout_below="@id/txt_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
+                android:layout_toEndOf="@+id/profile_image"
+                android:inputType=""
+                android:textStyle="bold"
+                android:text="amount"
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="16sp" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"/>
+
 
 
             <TextView
                 android:id="@+id/txt_description"
+                android:layout_below="@id/txt_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
@@ -85,7 +109,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txt_name"
+                android:layout_below="@id/txt_description"
                 android:inputType="text"
                 android:textColor="#000"
                 android:text="Loan id"
@@ -93,6 +117,7 @@
                 android:textSize="16sp" />
         <TextView
             android:id="@+id/txt_status"
+            android:layout_below="@id/txt_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -124,5 +149,5 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="15dp"
             android:id="@+id/reject"/>
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

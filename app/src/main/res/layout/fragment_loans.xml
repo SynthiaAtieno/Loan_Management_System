@@ -60,7 +60,7 @@
                     android:id="@+id/c_image"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/profile_image"
+                    android:src="@drawable/person"
                     app:civ_border_width="2dp" />
 
                 <TextView
@@ -87,6 +87,7 @@
                     android:textStyle="bold" />
 
 
+
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -99,7 +100,7 @@
             app:cardCornerRadius="6dp"
             app:cardElevation="8dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -110,6 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="My Loans"
+                    android:id="@+id/maintext"
                     android:textColor="#000"
                     android:textSize="16sp" />
 
@@ -117,10 +119,22 @@
                     android:id="@+id/totalLoans"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/maintext"
                     android:textColor="#000"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click to apply Loan"
+                    android:textAllCaps="false"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#EA092BED"
+                    android:textStyle="italic"
+                    android:textSize="18sp"
+                    android:id="@+id/applyLoanbtn"/>
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -162,7 +176,6 @@
             android:layout_marginStart="6dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="6dp"
-            android:layout_marginBottom="5dp"
             app:cardCornerRadius="6dp"
             app:cardElevation="8dp">
 
@@ -182,6 +195,40 @@
 
                 <TextView
                     android:id="@+id/totalLoansPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="5dp"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rejected Loans"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/totalLoansRejected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#000"

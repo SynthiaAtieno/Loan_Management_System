@@ -1,5 +1,6 @@
 package com.example.loanmanagementsystem.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loanmanagementsystem.R;
-import com.example.loanmanagementsystem.models.ApprovedLoans;
+import com.example.loanmanagementsystem.RejectedLoansActivity;
 import com.example.loanmanagementsystem.models.RejectedLoans;
 
 import java.util.List;
@@ -43,6 +45,20 @@ public class RejectedLoansAdapter extends RecyclerView.Adapter<RejectedLoansAdap
         holder.amount.setText("Ksh."+loans.getAmount()+".00");
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RejectedLoansActivity.class);
+                intent.putExtra("name",loans.getName());
+                intent.putExtra("amount","Ksh."+loans.getAmount()+".00");
+                intent.putExtra("description",loans.getDescription());
+                intent.putExtra("status",loans.getStatus());
+                intent.putExtra("loan_id", loans.getLoan_id());
+                intent.putExtra("date", loans.getDate());
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -51,7 +67,8 @@ public class RejectedLoansAdapter extends RecyclerView.Adapter<RejectedLoansAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView amount, description, status, name, user_id;
+        TextView amount, description, status, name, user_id, date;
+        CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -60,6 +77,7 @@ public class RejectedLoansAdapter extends RecyclerView.Adapter<RejectedLoansAdap
             status = itemView.findViewById(R.id.txt_status);
             name = itemView.findViewById(R.id.txt_name);
             user_id = itemView.findViewById(R.id.loan_id);
+            cardView = itemView.findViewById(R.id.adminLoanList);
         }
     }
 }

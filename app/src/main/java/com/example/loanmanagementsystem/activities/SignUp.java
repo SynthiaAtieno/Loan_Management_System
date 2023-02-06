@@ -159,7 +159,7 @@ public class SignUp extends AppCompatActivity {
     }
     private void displayUserInfo(String message){
         Snackbar.make(linearLayout,message,Snackbar.LENGTH_LONG).show();
-         passwordtxt.getEditText().setText("");
+         //passwordtxt.getEditText().setText("");
         progressDialog.dismiss();
     }
 

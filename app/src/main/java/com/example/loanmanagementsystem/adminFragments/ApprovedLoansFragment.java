@@ -47,6 +47,7 @@ public class ApprovedLoansFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getApprovedLoans();
+
     }
 
     @Override
@@ -69,6 +70,7 @@ public class ApprovedLoansFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     approvedLoansList.addAll(response.body());
                     adapter.notifyDataSetChanged();
+
                 }
             }
 

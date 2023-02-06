@@ -48,7 +48,7 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
         }
        // holder.user_id.setText(loans.getUserId());
         holder.description.setText(loans.getDescription());
-        holder.amount.setText("Ksh "+loans.getAmount());
+        holder.amount.setText("Ksh. "+loans.getAmount());
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
         holder.loan_id.setText(loans.getLoanId());
@@ -69,6 +69,8 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
                 intent.putExtra("status",loans.getStatus());
                 intent.putExtra("loanId", loans.getLoanId());
                 view.getContext().startActivity(intent);
+
+
             }
         });
 

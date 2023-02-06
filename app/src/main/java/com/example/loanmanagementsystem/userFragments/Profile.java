@@ -89,7 +89,7 @@ public class Profile extends Fragment {
             @Override
             public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
                 if (response.isSuccessful() && response.body() != null){
-                    //appConfig.updateUserLoginStatus(true);
+                    appConfig.updateUserLoginStatus(true);
                     total.setText("Ksh "+response.body().getTotal());
                 }
                 else {

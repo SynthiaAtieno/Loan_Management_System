@@ -41,16 +41,6 @@ public class All_Loans_Fragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    /*public static All_Loans_Fragment newInstance(String param1, String param2) {
-        All_Loans_Fragment fragment = new All_Loans_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +96,7 @@ public class All_Loans_Fragment extends Fragment {
         ApiClient.getApiClient().getLoan().enqueue(new Callback<List<Loan>>() {
             @Override
             public void onResponse(Call<List<Loan>> call, Response<List<Loan>> response) {
-                if (response.isSuccessful() && response.body() != null){
+                if (response.isSuccessful() && response.body() != null) {
                     loanList.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 }
@@ -114,7 +104,7 @@ public class All_Loans_Fragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Loan>> call, Throwable t) {
-                Toast.makeText(getContext(), "Error"+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

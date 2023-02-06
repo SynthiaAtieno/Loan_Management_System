@@ -111,22 +111,45 @@ public class ApplyLoanFragment extends Fragment {
             amounttxt.getEditText().setError("Please enter amount");
             amounttxt.getEditText().requestFocus();}
         else if (description.isEmpty()){
-            descriptiontxt.getEditText().setError("Please describe why you want the loan");
+            descriptiontxt.getEditText().setError("Please give reason for loan application");
             descriptiontxt.requestFocus();}
         else{
             ApiClient.getApiClient().applyLoan(amount, description,appConfig.getUserId(),1).enqueue(new Callback<ApplyLoan>() {
                 @Override
                 public void onResponse(Call<ApplyLoan> call, Response<ApplyLoan> response) {
-                    if (response.body()!= null && response.isSuccessful()){
-                        alertDialog.setTitle("Successful");
-                        alertDialog.setMessage(response.body().getMessage());
+                    if (response.isSuccessful()) {
+
+                        if (response.body().getStatus().equals("ok")) {
+                            alertDialog.setTitle("Successful");
+                            alertDialog.setMessage(response.body().getMessage());
+                            alertDialog.show();
+                            amounttxt.getEditText().setText("");
+                            descriptiontxt.getEditText().setText("");
+                        } else if (response.body().getStatus().equals("failed")) {
+                            alertDialog.setTitle("Failed");
+                            alertDialog.setMessage(response.body().getMessage());
+                            alertDialog.show();
+                            amounttxt.getEditText().setText("");
+                            descriptiontxt.getEditText().setText("");
+                        }
+                        else {
+                            alertDialog.setTitle("No data");
+                            alertDialog.setMessage(response.body().getMessage());
+                            alertDialog.show();
+                            amounttxt.getEditText().setText("");
+                            descriptiontxt.getEditText().setText("");
+                        }
+
+                    }
+                    else {
+                        alertDialog.setTitle("Un Successful");
+                        alertDialog.setMessage("Response not successful");
                         alertDialog.show();
                         amounttxt.getEditText().setText("");
                         descriptiontxt.getEditText().setText("");
-                        //Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                 }
+                        //Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                 @Override
                 public void onFailure(Call<ApplyLoan> call, Throwable t) {

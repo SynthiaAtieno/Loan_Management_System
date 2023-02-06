@@ -29,9 +29,9 @@ public class RejectedLoansFragment extends Fragment {
 
     RecyclerView recyclerView;
     List<RejectedLoans> rejectedLoans = new ArrayList<>();
-    //List<Loan> loanList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
     RejectedLoansAdapter adapter;
+
 
     public RejectedLoansFragment() {
         // Required empty public constructor
@@ -47,17 +47,15 @@ public class RejectedLoansFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      getRejectedLoans();
+        getRejectedLoans();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        //view = inflater.inflate(R.layout.fragment_rejected_loans, container, false);
 
-        view = inflater.inflate(R.layout.fragment_approved_loans, container, false);
-        recyclerView = view.findViewById(R.id.recyclerview);
+        view = inflater.inflate(R.layout.fragment_rejected_loans2, container, false);
+        recyclerView = view.findViewById(R.id.rejected_loans);
         linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new RejectedLoansAdapter(rejectedLoans);

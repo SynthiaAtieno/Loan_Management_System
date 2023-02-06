@@ -21,6 +21,31 @@ public class RejectedLoans {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("loan_id")
+    @Expose
+    private String loan_id;
+
+    @SerializedName("created_at")
+    @Expose
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getLoan_id() {
+        return loan_id;
+    }
+
+    public void setLoan_id(String loan_id) {
+        this.loan_id = loan_id;
+    }
+
+
 
     public String getUserId() {
         return userId;

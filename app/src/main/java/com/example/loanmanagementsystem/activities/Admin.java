@@ -14,10 +14,10 @@ import android.view.MenuItem;
 
 import com.example.loanmanagementsystem.adminFragments.ApprovedLoansFragment;
 import com.example.loanmanagementsystem.R;
+import com.example.loanmanagementsystem.adminFragments.RejectedLoansFragment;
 import com.example.loanmanagementsystem.apputil.AppConfig;
 import com.example.loanmanagementsystem.adminFragments.All_Loans_Fragment;
 import com.example.loanmanagementsystem.adminFragments.InProrgressLoan;
-import com.example.loanmanagementsystem.adminFragments.RejectedLoansFragment;
 import com.example.loanmanagementsystem.models.InProgressLoans;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -89,7 +89,7 @@ public class Admin extends AppCompatActivity {
         });
     }
 
-    private void  replaceFragment(Fragment fragment){
+    public void  replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.admin_fragment_layout,fragment);
