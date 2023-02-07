@@ -42,6 +42,10 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         progressDialog = new ProgressDialog(this);
         fullnametxt = findViewById(R.id.signup_full_name);
         phonetxt = findViewById(R.id.signup_phone);

@@ -47,6 +47,10 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
         appConfig = new AppConfig(this);
 
         linearLayout = findViewById(R.id.linear_layout);

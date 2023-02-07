@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.loanmanagementsystem.R;
@@ -37,6 +38,8 @@ public class InProrgressLoan extends Fragment {
     LinearLayoutManager linearLayoutManager;
     InprogressAdapter adapter;
     CardView mainCard;
+    ProgressBar progressBar;
+
 
 
     public InProrgressLoan() {
@@ -70,6 +73,10 @@ public class InProrgressLoan extends Fragment {
         adapter = new InprogressAdapter(inProgressLoansList);
         recyclerView.setAdapter(adapter);
 
+        progressBar = view.findViewById(R.id.progressbar);
+
+        progressBar.setVisibility(View.VISIBLE);
+
 
 
 
@@ -83,9 +90,9 @@ public class InProrgressLoan extends Fragment {
             @Override
             public void onResponse(Call<List<InProgressLoans>> call, Response<List<InProgressLoans>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-
                     inProgressLoansList.addAll(response.body());
                     adapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
                 }
 
             }

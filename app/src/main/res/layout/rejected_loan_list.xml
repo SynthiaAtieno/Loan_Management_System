@@ -27,7 +27,7 @@
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/person"
+            android:src="@drawable/person_profile"
             android:id="@+id/profile_image"
             />
         <TextView

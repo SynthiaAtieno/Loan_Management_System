@@ -1,16 +1,21 @@
 package com.example.loanmanagementsystem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loanmanagementsystem.adminFragments.ApprovedLoansFragment;
 import com.example.loanmanagementsystem.models.Approve;
 import com.example.loanmanagementsystem.retrofitutil.ApiClient;
 
@@ -19,7 +24,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ApprovedLoansActivity extends AppCompatActivity {
-    TextView name, amount, description, status, date;
+    TextView name, amount, description, status, date, backtxt;
+    ApprovedLoansFragment approvedLoansFragment;
 
     Button approve;
     RelativeLayout relativeLayout;
@@ -27,6 +33,10 @@ public class ApprovedLoansActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approved_loans);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        approvedLoansFragment = new ApprovedLoansFragment();
 
         name = findViewById(R.id.rejectName);
         amount = findViewById(R.id.rejectAmount);
@@ -42,6 +52,7 @@ public class ApprovedLoansActivity extends AppCompatActivity {
         description.setText(getIntent().getExtras().getString("description"));
         status.setText(getIntent().getExtras().getString("status"));
         date.setText(getIntent().getExtras().getString("date"));
+
 
 
         approve.setOnClickListener(view -> {
@@ -74,4 +85,14 @@ public class ApprovedLoansActivity extends AppCompatActivity {
             alertDialog.show();
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
+}

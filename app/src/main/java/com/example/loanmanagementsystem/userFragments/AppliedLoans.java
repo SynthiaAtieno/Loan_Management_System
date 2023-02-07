@@ -1,6 +1,7 @@
 package com.example.loanmanagementsystem.userFragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loanmanagementsystem.ApplyLoanActivity;
 import com.example.loanmanagementsystem.R;
 import com.example.loanmanagementsystem.models.TotalLoans;
 import com.example.loanmanagementsystem.adapter.RecyclerViewAdapter;
@@ -49,8 +51,6 @@ public class AppliedLoans extends Fragment {
     AppConfig appConfig;
     AlertDialog alertDialog;
 
-    //View view;
-
     public AppliedLoans() {
     }
 
@@ -63,6 +63,7 @@ public class AppliedLoans extends Fragment {
             String user_id = appConfig.getUserId();
             String username = appConfig.getNameOfUser();
         }
+
 
         getProfile();
         fetchLoans();
@@ -91,7 +92,8 @@ public class AppliedLoans extends Fragment {
         applyLoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, applyLoanFragment).commit();
+                Intent intent = new Intent(getContext(), ApplyLoanActivity.class);
+                startActivity(intent);
             }
         });
         return view;

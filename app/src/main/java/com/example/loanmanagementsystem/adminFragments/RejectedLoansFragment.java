@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.loanmanagementsystem.R;
@@ -31,6 +32,7 @@ public class RejectedLoansFragment extends Fragment {
     List<RejectedLoans> rejectedLoans = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
     RejectedLoansAdapter adapter;
+    ProgressBar progressBar;
 
 
     public RejectedLoansFragment() {
@@ -60,6 +62,10 @@ public class RejectedLoansFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new RejectedLoansAdapter(rejectedLoans);
         recyclerView.setAdapter(adapter);
+
+        progressBar = view.findViewById(R.id.progressbar);
+
+        progressBar.setVisibility(View.VISIBLE);
         return view;
     }
     public void getRejectedLoans(){
@@ -69,6 +75,7 @@ public class RejectedLoansFragment extends Fragment {
                 if (response.isSuccessful() && response.body() != null){
                     rejectedLoans.addAll(response.body());
                     adapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
 

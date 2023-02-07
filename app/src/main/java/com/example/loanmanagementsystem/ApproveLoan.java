@@ -1,11 +1,16 @@
 package com.example.loanmanagementsystem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -33,6 +38,8 @@ public class ApproveLoan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approve_loan);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         name = findViewById(R.id.approveName);
         amount = findViewById(R.id.approveAmount);
         desc = findViewById(R.id.approveDesc);
@@ -65,6 +72,7 @@ public class ApproveLoan extends AppCompatActivity {
                                 Toast.makeText(ApproveLoan.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 status.setText("Approved");
                                 btnlayout.setVisibility(View.INVISIBLE);
+                                startAlertDialog();
                             } else {
                                 Toast.makeText(ApproveLoan.this, "Error occurred" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -102,6 +110,7 @@ public class ApproveLoan extends AppCompatActivity {
                                 Toast.makeText(ApproveLoan.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 status.setText("Rejected");
                                 btnlayout.setVisibility(View.INVISIBLE);
+                                startAlertDialog();
                             }
                         }
 
@@ -119,5 +128,34 @@ public class ApproveLoan extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void startAlertDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        View view = inflater.inflate(R.layout.approvedmessage, null);
+        alert.setView(view);
+        final  AlertDialog dialog = alert.create();
+        dialog.setCancelable(false);
+        AppCompatButton close = view.findViewById(R.id.close_btn);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 }

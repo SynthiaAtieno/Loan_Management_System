@@ -37,6 +37,10 @@ public class Admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
 
         appConfig = new AppConfig(this);
 

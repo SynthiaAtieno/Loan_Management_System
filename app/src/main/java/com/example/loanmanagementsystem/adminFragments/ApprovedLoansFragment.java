@@ -1,5 +1,6 @@
 package com.example.loanmanagementsystem.adminFragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.loanmanagementsystem.R;
@@ -32,6 +34,7 @@ public class ApprovedLoansFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     ApprovedLoanAdapter adapter;
 
+    ProgressBar progressBar;
     public ApprovedLoansFragment() {
         // Required empty public constructor
     }
@@ -61,18 +64,30 @@ public class ApprovedLoansFragment extends Fragment {
         adapter = new ApprovedLoanAdapter(approvedLoansList);
         recyclerView.setAdapter(adapter);
 
+        progressBar = view.findViewById(R.id.progressbar);
+
+        progressBar.setVisibility(View.VISIBLE);
         return view;
     }
     public  void getApprovedLoans(){
+
         ApiClient.getApiClient().getApprovedLoan().enqueue(new Callback<List<ApprovedLoans>>() {
+
             @Override
             public void onResponse(Call<List<ApprovedLoans>> call, Response<List<ApprovedLoans>> response) {
                 if (response.isSuccessful() && response.body() != null){
                     approvedLoansList.addAll(response.body());
                     adapter.notifyDataSetChanged();
+                    progressBar.setVisibility(View.GONE);
 
+
+                }else {
+                    Toast.makeText(getContext(), "Response not succeseful", Toast.LENGTH_SHORT).show();
                 }
+
+
             }
+
 
             @Override
             public void onFailure(Call<List<ApprovedLoans>> call, Throwable t) {
