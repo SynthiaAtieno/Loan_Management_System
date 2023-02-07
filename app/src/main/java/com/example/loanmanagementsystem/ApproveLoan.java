@@ -110,7 +110,7 @@ public class ApproveLoan extends AppCompatActivity {
                                 Toast.makeText(ApproveLoan.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 status.setText("Rejected");
                                 btnlayout.setVisibility(View.INVISIBLE);
-                                startAlertDialog();
+                                startAlertDialogReject();
                             }
                         }
 
@@ -145,6 +145,24 @@ public class ApproveLoan extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
 
         View view = inflater.inflate(R.layout.approvedmessage, null);
+        alert.setView(view);
+        final  AlertDialog dialog = alert.create();
+        dialog.setCancelable(false);
+        AppCompatButton close = view.findViewById(R.id.close_btn);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+    }
+    private void startAlertDialogReject() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        View view = inflater.inflate(R.layout.rejectedmessage, null);
         alert.setView(view);
         final  AlertDialog dialog = alert.create();
         dialog.setCancelable(false);

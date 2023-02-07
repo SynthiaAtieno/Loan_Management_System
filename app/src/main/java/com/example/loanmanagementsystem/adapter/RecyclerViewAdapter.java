@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.loanmanagementsystem.models.Loan;
 import com.example.loanmanagementsystem.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>{
 
@@ -50,9 +52,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         if (loan.getStatus().equals("Rejected")){
             holder.status.setBackgroundColor(Color.RED);
         }
+
+        Locale locale = new Locale("en", "ke");
+        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(locale);
         holder.user_id.setText(loan.getUserId());
         holder.description.setText(loan.getDescription());
-        holder.amount.setText(loan.getAmount());
+        holder.amount.setText(defaultFormat.format(loan.getAmount()));
         holder.status.setText(loan.getStatus());
         holder. name.setText(loan.getName());
         holder.loan_id.setText(loan.getLoanId());

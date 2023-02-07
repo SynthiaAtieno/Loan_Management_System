@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.example.loanmanagementsystem.apputil.AppConfig;
 import com.example.loanmanagementsystem.models.ApiResponse;
@@ -31,6 +34,7 @@ public class ApplyLoanActivity extends AppCompatActivity {
     AppConfig appConfig;
     ApiResponse apiResponse = new ApiResponse();
     AlertDialog alertDialog;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class ApplyLoanActivity extends AppCompatActivity {
         alertDialog = new AlertDialog.Builder(this).create();
 
         linearLayout = findViewById(R.id.linear_layout);
+        progressBar = findViewById(R.id.progressbar);
 
         apply = findViewById(R.id.apply_button);
 
@@ -78,15 +83,16 @@ public class ApplyLoanActivity extends AppCompatActivity {
             descriptiontxt.getEditText().setError("Please give reason for loan application");
             descriptiontxt.requestFocus();
         } else {
+            progressBar.setVisibility(View.VISIBLE);
             ApiClient.getApiClient().applyLoan(amount, description, appConfig.getUserId(), 1).enqueue(new Callback<ApplyLoan>() {
                 @Override
                 public void onResponse(Call<ApplyLoan> call, Response<ApplyLoan> response) {
                     if (response.isSuccessful()) {
-
                         if (response.body().getStatus().equals("ok")) {
-                            alertDialog.setTitle("Successful");
+                           /* alertDialog.setTitle("Successful");
                             alertDialog.setMessage(response.body().getMessage());
-                            alertDialog.show();
+                            alertDialog.show();*/
+                            startAlertDialog();
                             amounttxt.getEditText().setText("");
                             descriptiontxt.getEditText().setText("");
                         } else if (response.body().getStatus().equals("failed")) {
@@ -104,12 +110,13 @@ public class ApplyLoanActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        alertDialog.setTitle("Un Successful");
+                        alertDialog.setTitle("UnSuccessful");
                         alertDialog.setMessage("Response not successful");
                         alertDialog.show();
                         amounttxt.getEditText().setText("");
                         descriptiontxt.getEditText().setText("");
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
                 //Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -132,5 +139,23 @@ public class ApplyLoanActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void startAlertDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+
+        View view = inflater.inflate(R.layout.applicationmessage, null);
+        alert.setView(view);
+        final  AlertDialog dialog = alert.create();
+        dialog.setCancelable(false);
+        AppCompatButton close = view.findViewById(R.id.close_btn);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 }

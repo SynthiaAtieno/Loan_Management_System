@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,9 @@ import com.example.loanmanagementsystem.models.ApiResponse;
 import com.example.loanmanagementsystem.models.Loan;
 import com.example.loanmanagementsystem.retrofitutil.ApiClient;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +42,7 @@ public class AppliedLoans extends Fragment {
     TextView txtname, totalLoans, approvedLoans, pendingLoans, rejectedLoans;
     CardView approved, rejected, pending;
     TextView applyLoan;
+    ProgressBar progressBar;
 
     View view;
     ArrayList<Loan> loanArrayList = new ArrayList<>();
@@ -50,6 +54,8 @@ public class AppliedLoans extends Fragment {
     ProgressDialog progressDialog;
     AppConfig appConfig;
     AlertDialog alertDialog;
+    Locale locale = new Locale("en", "ke");
+    NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(locale);
 
     public AppliedLoans() {
     }
@@ -86,6 +92,8 @@ public class AppliedLoans extends Fragment {
         progressDialog = new ProgressDialog(getContext());
         appConfig = new AppConfig(getContext());
         rejectedLoans = view.findViewById(R.id.totalLoansRejected);
+        progressBar = view.findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
 
 
 
@@ -123,11 +131,8 @@ public class AppliedLoans extends Fragment {
             public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
-                        /*progressDialog.setTitle("Getting Loans");
-                        progressDialog.setMessage("Please wait...");
-                        progressDialog.setCanceledOnTouchOutside(false);
-                        progressDialog.show();*/
-                        totalLoans.setText("Ksh "+response.body().getTotal());
+
+                        totalLoans.setText(defaultFormat.format(response.body().getTotal()));
                     } else {
                         //progressDialog.dismiss();
                         Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
@@ -150,7 +155,7 @@ public class AppliedLoans extends Fragment {
             @Override
             public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
                 if (response.isSuccessful() && response.body() != null){
-                    approvedLoans.setText("Ksh "+response.body().getTotal());
+                    approvedLoans.setText(defaultFormat.format(response.body().getTotal()));
                 }
                 else {
                     Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
@@ -172,7 +177,7 @@ public class AppliedLoans extends Fragment {
             @Override
             public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
                 if (response.isSuccessful() && response.body() != null){
-                    pendingLoans.setText("Ksh "+response.body().getTotal());
+                    pendingLoans.setText(defaultFormat.format(response.body().getTotal()));
                 }
                 else {
                     Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();
@@ -204,7 +209,8 @@ public class AppliedLoans extends Fragment {
             @Override
             public void onResponse(Call<TotalLoans> call, Response<TotalLoans> response) {
                 if (response.isSuccessful() && response.body() != null){
-                    rejectedLoans.setText("Ksh "+response.body().getTotal());
+                    progressBar.setVisibility(View.GONE);
+                    rejectedLoans.setText(defaultFormat.format(response.body().getTotal()));
                 }
                 else {
                     Toast.makeText(getContext(), "No data found", Toast.LENGTH_SHORT).show();

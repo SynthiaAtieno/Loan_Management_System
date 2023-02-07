@@ -15,7 +15,9 @@ import com.example.loanmanagementsystem.R;
 import com.example.loanmanagementsystem.RejectedLoansActivity;
 import com.example.loanmanagementsystem.models.RejectedLoans;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class RejectedLoansAdapter extends RecyclerView.Adapter<RejectedLoansAdapter.MyViewHolder>{
 
@@ -40,9 +42,11 @@ public class RejectedLoansAdapter extends RecyclerView.Adapter<RejectedLoansAdap
             holder.status.setBackgroundColor(Color.RED);
         }
 
+        Locale locale = new Locale("en", "ke");
+        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(locale);
         holder.user_id.setText(loans.getUserId());
         holder.description.setText(loans.getDescription());
-        holder.amount.setText("Ksh."+loans.getAmount()+".00");
+        holder.amount.setText(defaultFormat.format(loans.getAmount()));
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
 
@@ -51,7 +55,7 @@ public class RejectedLoansAdapter extends RecyclerView.Adapter<RejectedLoansAdap
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RejectedLoansActivity.class);
                 intent.putExtra("name",loans.getName());
-                intent.putExtra("amount","Ksh."+loans.getAmount()+".00");
+                intent.putExtra("amount",defaultFormat.format(loans.getAmount()));
                 intent.putExtra("description",loans.getDescription());
                 intent.putExtra("status",loans.getStatus());
                 intent.putExtra("loan_id", loans.getLoan_id());

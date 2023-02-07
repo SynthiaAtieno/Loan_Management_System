@@ -91,6 +91,7 @@ public class ApprovedLoansFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<ApprovedLoans>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Error occurred: "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

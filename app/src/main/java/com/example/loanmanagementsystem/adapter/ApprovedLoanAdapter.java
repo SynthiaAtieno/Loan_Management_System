@@ -1,5 +1,6 @@
 package com.example.loanmanagementsystem.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -16,7 +17,9 @@ import com.example.loanmanagementsystem.R;
 import com.example.loanmanagementsystem.RejectedLoansActivity;
 import com.example.loanmanagementsystem.models.ApprovedLoans;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class ApprovedLoanAdapter extends RecyclerView.Adapter<ApprovedLoanAdapter.MyViewHolder>{
 
@@ -34,6 +37,7 @@ public class ApprovedLoanAdapter extends RecyclerView.Adapter<ApprovedLoanAdapte
         return new ApprovedLoanAdapter.MyViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
@@ -43,9 +47,12 @@ public class ApprovedLoanAdapter extends RecyclerView.Adapter<ApprovedLoanAdapte
             holder.status.setBackgroundColor(Color.GREEN);
         }
 
+        Locale locale = new Locale("en", "ke");
+        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(locale);
+
         holder.loan_id.setText(loans.getLoanId());
         holder.description.setText(loans.getDescription());
-        holder.amount.setText("Ksh."+loans.getAmount()+".00");
+        holder.amount.setText(defaultFormat.format(loans.getAmount()));
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
 
@@ -55,7 +62,7 @@ public class ApprovedLoanAdapter extends RecyclerView.Adapter<ApprovedLoanAdapte
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ApprovedLoansActivity.class);
                 intent.putExtra("name", loans.getName());
-                intent.putExtra("amount", "Ksh."+loans.getAmount()+".00");
+                intent.putExtra("amount", defaultFormat.format(loans.getAmount()));
                 intent.putExtra("status", loans.getStatus());
                 intent.putExtra("description", loans.getDescription());
                 intent.putExtra("loanId", loans.getLoanId());

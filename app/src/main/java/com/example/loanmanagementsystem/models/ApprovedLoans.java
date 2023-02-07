@@ -11,7 +11,7 @@ public class ApprovedLoans {
     private String userId;
     @SerializedName("amount")
     @Expose
-    private String amount;
+    private int amount;
     @SerializedName("description")
     @Expose
     private String description;
@@ -54,11 +54,11 @@ public class ApprovedLoans {
         this.userId = userId;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

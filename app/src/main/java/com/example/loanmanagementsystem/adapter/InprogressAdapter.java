@@ -16,7 +16,9 @@ import com.example.loanmanagementsystem.ApproveLoan;
 import com.example.loanmanagementsystem.R;
 import com.example.loanmanagementsystem.models.InProgressLoans;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.MyViewHolder> {
     private List<InProgressLoans> inProgressLoansList;
@@ -46,9 +48,11 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
         if (loans.getStatus().equals("Rejected")){
             holder.status.setBackgroundColor(Color.RED);
         }
+        Locale locale = new Locale("en", "ke");
+        NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(locale);
        // holder.user_id.setText(loans.getUserId());
         holder.description.setText(loans.getDescription());
-        holder.amount.setText("Ksh. "+loans.getAmount());
+        holder.amount.setText(defaultFormat.format(loans.getAmount()));
         holder.status.setText(loans.getStatus());
         holder. name.setText(loans.getName());
         holder.loan_id.setText(loans.getLoanId());
@@ -64,7 +68,7 @@ public class InprogressAdapter extends RecyclerView.Adapter<InprogressAdapter.My
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ApproveLoan.class);
                 intent.putExtra("name",loans.getName());
-                intent.putExtra("amount","Ksh."+loans.getAmount()+".00");
+                intent.putExtra("amount",defaultFormat.format(loans.getAmount()));
                 intent.putExtra("description",loans.getDescription());
                 intent.putExtra("status",loans.getStatus());
                 intent.putExtra("loanId", loans.getLoanId());

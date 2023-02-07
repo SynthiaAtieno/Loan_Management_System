@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName;
 public class TotalLoans {
     @SerializedName("total")
     @Expose
-    private String total;
+    private int total;
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 }
