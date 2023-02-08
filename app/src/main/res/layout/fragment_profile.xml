@@ -110,13 +110,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     >
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/white"
-                        android:src="@drawable/ic_baseline_currency_rupee_24" />
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KSH"
+                        android:textSize="34sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -174,13 +175,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     >
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        app:civ_border_width="1dp"
-                        app:civ_border_color="@color/white"
-                        android:src="@drawable/ic_baseline_currency_rupee_24" />
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KSH"
+                        android:textSize="34sp"
+                        android:textStyle="bold"
+                        android:textColor="#000"
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
