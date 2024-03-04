@@ -1,15 +1,18 @@
 A simple loan management and application app with api and database hosted
 ## Demo
 <p float="left">
-<img src="screenshots/get started page.png" width=250/>
-<img src="screenshots/landing page.png" width=250/>
-<img src="screenshots/landing page1.png" width=250/>
-<img src="screenshots/landingpage2.png" width=250/>
-<img src="screenshots/login page.png" width=250/>
-<img src="screenshots/drawer menu.png" width=250/>
-<img src="screenshots/payslip page.png" width=250/>
-<img src="screenshots/homepage.png" width=250/>
-<img src="screenshots/logout.png" width=250/>
+<img src="screenshots/signup page.png" width=250/>
+<img src="screenshots/login%20page.png" width=250/>
+<img src="screenshots/user%20homepage.png" width=250/>
+<img src="screenshots/user%20profile.png" width=250/>
+
+
+# Admin Demo
+<img src="screenshots/all%20approved%20loans.png" width=250/>
+<img src="screenshots/all%20pending%20loans.png" width=250/>
+<img src="screenshots/all%20rejected%20loans.png" width=250/>
+<img src="screenshots/approved%20popup.png" width=250/>
+<img src="screenshots/rejected%20popup.png" width=250/>
 
   </p>
   
