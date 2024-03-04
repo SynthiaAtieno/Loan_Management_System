@@ -5,9 +5,10 @@ A simple loan management and application app with api and database hosted
 <img src="screenshots/login%20page.png" width=250/>
 <img src="screenshots/user%20homepage.png" width=250/>
 <img src="screenshots/user%20profile.png" width=250/>
+</p>
 
-
-# Admin Demo
+## Admin Demo
+<p float="left">
 <img src="screenshots/all%20approved%20loans.png" width=250/>
 <img src="screenshots/all%20pending%20loans.png" width=250/>
 <img src="screenshots/all%20rejected%20loans.png" width=250/>
